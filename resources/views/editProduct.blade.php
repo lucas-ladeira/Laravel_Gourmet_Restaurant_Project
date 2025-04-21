@@ -7,13 +7,13 @@
   <meta name="viewport" content="width=device-width initial-scale=1.0">
   <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Dashboard</title>
   <!-- GLOBAL MAINLY STYLES-->
-  <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-  <link href="./assets/vendors/themify-icons/css/themify-icons.css" rel="stylesheet" />
+  <link href="{{url('./assets/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet" />
+  <link href="{{url('./assets/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
+  <link href="{{url('./assets/vendors/themify-icons/css/themify-icons.css')}}" rel="stylesheet" />
   <!-- PLUGINS STYLES-->
-  <link href="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
+  <link href="{{url('./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css')}}" rel="stylesheet" />
   <!-- THEME STYLES-->
-  <link href="assets/css/main.min.css" rel="stylesheet" />
+  <link href="{{url('assets/css/main.min.css')}}" rel="stylesheet" />
   <!-- PAGE LEVEL STYLES-->
 </head>
 
@@ -30,63 +30,55 @@
       <div class="page-content fade-in-up">
         <!-- ANALYTICS -->
         @include('includes.analytics')
-        
+
       </div>
+
+      <!-- Basic form -->
       <div class="ibox">
         <div class="ibox-head">
-          <!-- <div class="ibox-title">Responsive Table</div> -->
-          <a href="{{url('addProductRoute')}}">
-            <button class="btn btn-primary p-2">Ajouter un produit</button>
-          </a>
-        </div>
-        <div class="ibox-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th width="50px"></th>
-                  <th>Image</th>
-                  <th>ID</th>
-                  <th>Nom du produit</th>
-                  <th>Prix</th>
-                  <th>Quantité</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($products as $p)
-                <tr>
-                  <td class="align-middle">
-                    <label class="ui-checkbox">
-                      <input type="checkbox">
-                      <span class="input-span"></span>
-                    </label>
-                  </td>
-                  <td><img src="{{url('assets/images/'.$p->productImage)}}" alt="" height="100px" width="50px"></td>
-                  <td class="align-middle">{{$p->id}}</td>
-                  <td class="align-middle">{{$p->productName}}</td>
-                  <td class="align-middle">{{$p->productPrice}} $</td>
-                  <td class="align-middle">{{$p->productQuantity}}</td>
-                  <td class="align-middle">
-
-                    <a href="{{ route('routeEditProduct.editProduct', $p->id) }}">
-                      <button class="btn btn-outline-secondary btn-xs m-r-5 m-1" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                    </a>
-
-                    <form action="{{ route('deleteProductRoute.deleteProduct', $p->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button class="btn btn-outline-danger btn-xs m-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
-                
-              </tbody>
-            </table>
+          <div class="ibox-title">Basic form</div>
+          <div class="ibox-tools">
+            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item">option 1</a>
+              <a class="dropdown-item">option 2</a>
+            </div>
           </div>
         </div>
+        <div class="ibox-body">
+          <form enctype="multipart/form-data" action="{{ route('routeEditProduct.updateProduct', $product->id) }}" method="post">
+            @csrf
+            @method('PUT')
+            <div class="row">
+              <div class="col-sm-6 form-group">
+                <label>Nom du produit</label>
+                <input class="form-control" type="text" placeholder="Entrez le nom du produit" name="productName" value="{{old('productName', $product->productName)}}">
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Prix</label>
+                <input class="form-control" type="number" placeholder="Entrez le prix" name="productPrice" value="{{old('productPrice', $product->productPrice)}}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Quantité</label>
+              <input class="form-control" type="number" placeholder="Entrez la quantité" name="productQuantity" value="{{old('productQuantity', $product->productQuantity)}}">
+            </div>
+            <div class="form-group">
+              <label>Image</label>
+              <input class="form-control" type="file" placeholder="Entrez l'image" name="productImage" value="{{old('productImage', $product->productImage)}}">
+            </div>
+            <div class="form-group">
+              <!-- <label>Image</label> -->
+              <img src="{{url('assets/images/'.$product->productImage)}}" alt="{{$product->productImage}}" width="100px">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-outline-primary" type="submit">Modifier</button>
+            </div>
+          </form>
+        </div>
       </div>
+
       <!-- END PAGE CONTENT-->
       @include('includes.footer')
     </div>
@@ -228,20 +220,20 @@
   </div>
   <!-- END PAGA BACKDROPS-->
   <!-- CORE PLUGINS-->
-  <script src="./assets/vendors/jquery/dist/jquery.min.js" type="text/javascript"></script>
-  <script src="./assets/vendors/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
-  <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-  <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
-  <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/jquery/dist/jquery.min.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/popper.js/dist/umd/popper.min.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/bootstrap/dist/js/bootstrap.min.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/metisMenu/dist/metisMenu.min.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
   <!-- PAGE LEVEL PLUGINS-->
-  <script src="./assets/vendors/chart.js/dist/Chart.min.js" type="text/javascript"></script>
-  <script src="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
-  <script src="./assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
-  <script src="./assets/vendors/jvectormap/jquery-jvectormap-us-aea-en.js" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/chart.js/dist/Chart.min.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js')}}" type="text/javascript"></script>
+  <script src="{{url('./assets/vendors/jvectormap/jquery-jvectormap-us-aea-en.js')}}" type="text/javascript"></script>
   <!-- CORE SCRIPTS-->
-  <script src="assets/js/app.min.js" type="text/javascript"></script>
+  <script src="{{url('assets/js/app.min.js')}}" type="text/javascript"></script>
   <!-- PAGE LEVEL SCRIPTS-->
-  <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
+  <script src="{{url('./assets/js/scripts/dashboard_1_demo.js')}}" type="text/javascript"></script>
 </body>
 
 </html>

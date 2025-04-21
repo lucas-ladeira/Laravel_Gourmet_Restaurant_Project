@@ -30,63 +30,50 @@
       <div class="page-content fade-in-up">
         <!-- ANALYTICS -->
         @include('includes.analytics')
-        
+
       </div>
+
+      <!-- Basic form -->
       <div class="ibox">
         <div class="ibox-head">
-          <!-- <div class="ibox-title">Responsive Table</div> -->
-          <a href="{{url('addProductRoute')}}">
-            <button class="btn btn-primary p-2">Ajouter un produit</button>
-          </a>
-        </div>
-        <div class="ibox-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th width="50px"></th>
-                  <th>Image</th>
-                  <th>ID</th>
-                  <th>Nom du produit</th>
-                  <th>Prix</th>
-                  <th>Quantité</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($products as $p)
-                <tr>
-                  <td class="align-middle">
-                    <label class="ui-checkbox">
-                      <input type="checkbox">
-                      <span class="input-span"></span>
-                    </label>
-                  </td>
-                  <td><img src="{{url('assets/images/'.$p->productImage)}}" alt="" height="100px" width="50px"></td>
-                  <td class="align-middle">{{$p->id}}</td>
-                  <td class="align-middle">{{$p->productName}}</td>
-                  <td class="align-middle">{{$p->productPrice}} $</td>
-                  <td class="align-middle">{{$p->productQuantity}}</td>
-                  <td class="align-middle">
-
-                    <a href="{{ route('routeEditProduct.editProduct', $p->id) }}">
-                      <button class="btn btn-outline-secondary btn-xs m-r-5 m-1" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
-                    </a>
-
-                    <form action="{{ route('deleteProductRoute.deleteProduct', $p->id) }}" method="post">
-                      @csrf
-                      @method('DELETE')
-                      <button class="btn btn-outline-danger btn-xs m-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
-                
-              </tbody>
-            </table>
+          <div class="ibox-title">Basic form</div>
+          <div class="ibox-tools">
+            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item">option 1</a>
+              <a class="dropdown-item">option 2</a>
+            </div>
           </div>
         </div>
+        <div class="ibox-body">
+          <form enctype="multipart/form-data" action="{{ route('postProduct.addNewProduct') }}" method="post">
+            @csrf
+            <div class="row">
+              <div class="col-sm-6 form-group">
+                <label>Nom du produit</label>
+                <input class="form-control" type="text" placeholder="Entrez le nom du produit" name="productName">
+              </div>
+              <div class="col-sm-6 form-group">
+                <label>Prix</label>
+                <input class="form-control" type="number" placeholder="Entrez le prix" name="productPrice">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Quantité</label>
+              <input class="form-control" type="number" placeholder="Entrez la quantité" name="productQuantity">
+            </div>
+            <div class="form-group">
+              <label>Image</label>
+              <input class="form-control" type="file" placeholder="Entrez l'image" name="productImage">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-default" type="submit">Ajouter</button>
+            </div>
+          </form>
+        </div>
       </div>
+
       <!-- END PAGE CONTENT-->
       @include('includes.footer')
     </div>

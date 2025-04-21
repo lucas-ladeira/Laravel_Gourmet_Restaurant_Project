@@ -59,8 +59,18 @@ class ProductController extends Controller
     // Edition d'un produit
     public function editProduct($id)
     {
-        $produit = Product::findOrFail($id);
+        $product = Product::findOrFail($id);
         return view('editProduct', compact('product'));
+    }
+
+    public function updateProduct(Request $request, $id) {
+        // validação + update aqui
+        $product = Product::findOrFail($id);
+        $product->productName = $request->productName;
+        $product->productPrice = $request->productPrice;
+        $product->productQuantity = $request->productQuantity;
+        $product->save();
+        return redirect()->route('routeEditProduct.editProduct', ['id' => $product->id]);
     }
 
 
@@ -72,5 +82,11 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return view('front.products', compact('products'));
+    }
+
+    public function showSingleProduct($id)
+    {
+        $product = Product::findOrFail($id);    // Retourner un seul produit
+        return view('front.singleProduct', compact('product'));
     }
 }
