@@ -20,7 +20,7 @@
           <span class="nav-label">Produits</span><i class="fa fa-angle-left arrow"></i></a>
         <ul class="nav-2-level collapse">
           <li>
-            <a href="{{url('/routeProduits')}}">Gestion des produits</a>
+            <a href="{{url('/productRoute')}}">Gestion des produits</a>
           </li>
           <!-- <li>
             <a href="typography.html">Typography</a>
