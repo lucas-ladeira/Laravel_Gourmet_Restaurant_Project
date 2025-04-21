@@ -57,7 +57,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label>Prix</label>
-                <input class="form-control" type="number" placeholder="Entrez le prix" name="productPrice" value="{{old('productPrice', $product->productPrice)}}">
+                <input class="form-control" type="number" step="0.01" placeholder="Entrez le prix" name="productPrice" value="{{old('productPrice', $product->productPrice)}}">
               </div>
             </div>
             <div class="form-group">

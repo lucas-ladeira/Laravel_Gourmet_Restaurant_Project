@@ -16,36 +16,12 @@
       </li>
       <li class="heading">FEATURES</li>
       <li>
-        <a href="javascript:;"><i class="sidebar-item-icon fa fa-bookmark"></i>
+        <a href="javascript:;"><i class="sidebar-item-icon fa fa-cutlery"></i>
           <span class="nav-label">Produits</span><i class="fa fa-angle-left arrow"></i></a>
         <ul class="nav-2-level collapse">
           <li>
             <a href="{{url('/productRoute')}}">Gestion des produits</a>
           </li>
-          <!-- <li>
-            <a href="typography.html">Typography</a>
-          </li>
-          <li>
-            <a href="panels.html">Panels</a>
-          </li>
-          <li>
-            <a href="buttons.html">Buttons</a>
-          </li>
-          <li>
-            <a href="tabs.html">Tabs</a>
-          </li>
-          <li>
-            <a href="alerts_tooltips.html">Alerts &amp; Tooltips</a>
-          </li>
-          <li>
-            <a href="badges_progress.html">Badges &amp; Progress</a>
-          </li>
-          <li>
-            <a href="lists.html">List</a>
-          </li>
-          <li>
-            <a href="cards.html">Card</a>
-          </li> -->
         </ul>
       </li>
       <li>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width initial-scale=1.0">
-  <title>Admincast bootstrap 4 &amp; angular 5 admin template, Шаблон админки | Dashboard</title>
+  <title>Products | Admin Dashboard</title>
   <!-- GLOBAL MAINLY STYLES-->
   <link href="./assets/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="./assets/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
       <div class="page-content fade-in-up">
         <!-- ANALYTICS -->
         @include('includes.analytics')
-        
+
       </div>
       <div class="ibox">
         <div class="ibox-head">
@@ -65,7 +65,7 @@
                   <td><img src="{{url('assets/images/'.$p->productImage)}}" alt="" height="100px" width="50px"></td>
                   <td class="align-middle">{{$p->id}}</td>
                   <td class="align-middle">{{$p->productName}}</td>
-                  <td class="align-middle">{{$p->productPrice}} $</td>
+                  <td class="align-middle">{{ number_format($p->productPrice, 2, '.', '') }} $</td>
                   <td class="align-middle">{{$p->productQuantity}}</td>
                   <td class="align-middle">
 
@@ -73,15 +73,23 @@
                       <button class="btn btn-outline-secondary btn-xs m-r-5 m-1" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil font-14"></i></button>
                     </a>
 
-                    <form action="{{ route('deleteProductRoute.deleteProduct', $p->id) }}" method="post">
+                    <!-- <form action="{{ route('deleteProductRoute.deleteProduct', $p->id) }}" method="post">
+                      @csrf
+                      @method('DELETE') -->
+                    <button type="button" class="btn btn-outline-danger btn-xs m-1"
+                      onclick="confirmDelete('{{ $p->id }}')">
+                      <i class="fa fa-trash font-14"></i>
+                    </button>
+                    <!-- </form> -->
+                    <!-- Formulário oculto -->
+                    <form id="delete-form-{{ $p->id }}" action="{{ route('deleteProductRoute.deleteProduct', $p->id) }}" method="POST" style="display: none;">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-outline-danger btn-xs m-1" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash font-14"></i></button>
                     </form>
                   </td>
                 </tr>
                 @endforeach
-                
+
               </tbody>
             </table>
           </div>
@@ -233,6 +241,7 @@
   <script src="./assets/vendors/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
   <script src="./assets/vendors/metisMenu/dist/metisMenu.min.js" type="text/javascript"></script>
   <script src="./assets/vendors/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- PAGE LEVEL PLUGINS-->
   <script src="./assets/vendors/chart.js/dist/Chart.min.js" type="text/javascript"></script>
   <script src="./assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
@@ -242,6 +251,26 @@
   <script src="assets/js/app.min.js" type="text/javascript"></script>
   <!-- PAGE LEVEL SCRIPTS-->
   <script src="./assets/js/scripts/dashboard_1_demo.js" type="text/javascript"></script>
+
+  <script>
+    function confirmDelete(id) {
+      Swal.fire({
+        title: 'Confirmer la suppression',
+        text: "Voulez-vous vraiment supprimer ce produit ?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Oui, supprimer',
+        cancelButtonText: 'Annuler'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById('delete-form-' + id).submit();
+        }
+      });
+    }
+  </script>
+
 </body>
 
 </html>

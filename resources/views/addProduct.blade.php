@@ -56,7 +56,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label>Prix</label>
-                <input class="form-control" type="number" placeholder="Entrez le prix" name="productPrice">
+                <input class="form-control" type="number" step="0.01" placeholder="Entrez le prix" name="productPrice">
               </div>
             </div>
             <div class="form-group">
@@ -68,7 +68,7 @@
               <input class="form-control" type="file" placeholder="Entrez l'image" name="productImage">
             </div>
             <div class="form-group">
-              <button class="btn btn-default" type="submit">Ajouter</button>
+              <button class="btn btn-outline-primary" type="submit">Ajouter</button>
             </div>
           </form>
         </div>
