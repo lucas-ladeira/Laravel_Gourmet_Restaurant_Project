@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
  * Routes du BackOffice (Interface administrateur)
  * */
 // Affichage du Dashboard
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('backOffice');
 });
 
@@ -27,7 +27,9 @@ Route::get('/routeEditProduct/{id}', [ProductController::class, 'editProduct'])-
  * Routes du FrontOffice (Interface utilisateur)
  * */
 // Affichage de tous les produits
-Route::get('/products', [ProductController::class, 'getAllProducts']);
+Route::get('/', function () {
+    return view('front.index');
+});
 
 // Affichage un seul produit
 Route::get('/getDetails', function () {
