@@ -83,8 +83,33 @@
     </div>
   </header>
 
-  <main class="main">
+  <main class="main container py-5">
+    <div class="card mx-auto" style="max-width: 500px;">
+      <img
+        src="{{ url('assets/images/'.$product->productImage) }}"
+        class="card-img-top img-fluid"
+        alt="{{ $product->productName }}">
+      <div class="card-body">
+        <h3 class="card-title">{{ $product->productName }}</h3>
+        @if(!empty($product->description))
+        <p class="card-text">{{ $product->description }}</p>
+        @endif
+        <p class="card-text">
+          <strong>Price:</strong> $ {{ number_format($product->productPrice, 2) }}
+        </p>
+        <p class="card-text">
+          <strong>In stock:</strong> {{ $product->productQuantity }} un.
+        </p>
 
+        <a href="{{ url()->previous() }}" class="btn btn-outline-danger me-2">
+          ← Back to Menu
+        </a>
+        <a href="#" class="btn btn-outline-success">
+          <i class="bi bi-cart-plus"></i>
+          Add to Cart
+        </a>
+      </div>
+    </div>
   </main>
 
   <footer id="footer" class="footer dark-background">
