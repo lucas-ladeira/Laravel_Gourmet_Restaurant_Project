@@ -80,7 +80,7 @@ class ProductController extends Controller
     // Affichage de tous les produits
     public function getAllProducts()
     {
-        $products = Product::all();
+        $products = Product::paginate(6);
         return view('front.index', compact('products'));
     }
 
