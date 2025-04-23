@@ -81,7 +81,7 @@ class ProductController extends Controller
     public function getAllProducts()
     {
         $products = Product::all();
-        return view('front.products', compact('products'));
+        return view('front.index', compact('products'));
     }
 
     public function showSingleProduct($id)

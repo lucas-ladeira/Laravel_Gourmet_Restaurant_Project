@@ -27,9 +27,8 @@ Route::get('/routeEditProduct/{id}', [ProductController::class, 'editProduct'])-
  * Routes du FrontOffice (Interface utilisateur)
  * */
 // Affichage de tous les produits
-Route::get('/', function () {
-    return view('front.index');
-});
+Route::get('/', [ProductController::class, 'getAllProducts'])
+    ->name('front.index');
 
 // Affichage un seul produit
 Route::get('/getDetails', function () {
